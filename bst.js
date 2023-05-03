@@ -1,4 +1,4 @@
-import { mergeSort } from "./mergeSort/mergeSort"
+import { mergeSort } from "./mergeSort/mergeSort.js"
 
 function Node(data, left = null, right = null) {
     return {
@@ -9,7 +9,11 @@ function Node(data, left = null, right = null) {
 }
 
 const Tree = (array) => {
-    root = null
+    let root = null
+   
+    function getTreeRoot() {
+        return root;
+    }
 
     const buildTreeRec = (arr) => {
         //base case
@@ -17,21 +21,34 @@ const Tree = (array) => {
 
         let mid = Math.floor((arr.length) / 2)  //find midPoint, which will then become the 'Root Node'
         let rootNode = Node(arr[mid])
-        newNode.left = buildTreeRec(arr.slice(0,mid))  //set the left child recursively
-        newNode.right = buildTreeRec(arr.slice(mid+1, arr.length))  //set the right child recursively
-        root = rootNode
-        return root
+        rootNode.left = buildTreeRec(arr.slice(0,mid))  //set the left child recursively
+        rootNode.right = buildTreeRec(arr.slice(mid+1, arr.length))  //set the right child recursively
+        //root = rootNode
+        return rootNode
     }
 
     const sortArrayRemoveDuplicates = (arr) => {
         const sortedArray = mergeSort(arr) //sorts the given array recursively using mergeSort algorithm
-        const noDuplicates = []
+        const sortedAndReady = []
         for (let i = 0; i < sortedArray.length; i++){
             if (sortedArray[i] !== sortedArray[i+1]){
-                noDuplicates.push(sortedArray[i])
+                sortedAndReady.push(sortedArray[i])
             }
-        return noDuplicates
+        return sortedAndReady
         }
     }
 
+    if(array) {root = buildTreeRec(sortArrayRemoveDuplicates(array))};
+
+    return {
+        root,
+        getTreeRoot
+    }
+
 }
+
+
+let a = [9,8,7,6,5,4,3,2,1]
+let myTree = Tree(a)
+
+console.log(myTree.getTreeRoot())
