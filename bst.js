@@ -11,7 +11,7 @@ const Tree = (array) => {
 
     const buildTreeRec = (arr) => {
         //base case
-        if (start > end) {return null}
+        if (arr.length === 0) {return null}
 
         let mid = Math.floor((arr.length) / 2)  //find midPoint, which will then become the 'Root Node'
         let rootNode = Node(arr[mid])
