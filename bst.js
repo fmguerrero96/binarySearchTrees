@@ -22,4 +22,16 @@ const Tree = (array) => {
         root = rootNode
         return root
     }
+
+    const sortArrayRemoveDuplicates = (arr) => {
+        const sortedArray = mergeSort(arr) //sorts the given array recursively using mergeSort algorithm
+        const noDuplicates = []
+        for (let i = 0; i < sortedArray.length; i++){
+            if (sortedArray[i] !== sortedArray[i+1]){
+                noDuplicates.push(sortedArray[i])
+            }
+        return noDuplicates
+        }
+    }
+
 }
