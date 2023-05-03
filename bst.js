@@ -1,3 +1,5 @@
+import { mergeSort } from "./mergeSort/mergeSort"
+
 function Node(data, left = null, right = null) {
     return {
         data, 
