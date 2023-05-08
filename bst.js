@@ -33,15 +33,14 @@ const Tree = (array) => {
         for (let i = 0; i < sortedArray.length; i++){
             if (sortedArray[i] !== sortedArray[i+1]){
                 sortedAndReady.push(sortedArray[i])
-            }
-        return sortedAndReady
+            }   
         }
+        return sortedAndReady
     }
 
     if(array) {root = buildTreeRec(sortArrayRemoveDuplicates(array))};
 
     return {
-        root,
         getTreeRoot
     }
 
