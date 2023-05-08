@@ -15,6 +15,11 @@ const Tree = (array) => {
         return root;
     }
 
+    const buildTree = (array) => {
+        const preparedArray = sortArrayRemoveDuplicates(array);
+        return buildTreeRec(preparedArray);
+    }
+
     const buildTreeRec = (arr) => {
         //base case
         if (arr.length === 0) {return null}
@@ -23,7 +28,6 @@ const Tree = (array) => {
         let rootNode = Node(arr[mid])
         rootNode.left = buildTreeRec(arr.slice(0,mid))  //set the left child recursively
         rootNode.right = buildTreeRec(arr.slice(mid+1, arr.length))  //set the right child recursively
-        //root = rootNode
         return rootNode
     }
 
@@ -38,10 +42,24 @@ const Tree = (array) => {
         return sortedAndReady
     }
 
-    if(array) {root = buildTreeRec(sortArrayRemoveDuplicates(array))};
+    const prettyPrint = (node, prefix = '', isLeft = true) => {
+        if (node === null) {
+           return;
+        }
+        if (node.right !== null) {
+          prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+        }
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+        if (node.left !== null) {
+          prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        }
+      }
+
+    if(array) {root = buildTree(array)};
 
     return {
-        getTreeRoot
+        getTreeRoot,
+        prettyPrint
     }
 
 }
@@ -51,3 +69,4 @@ let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
 console.log(myTree.getTreeRoot())
+myTree.prettyPrint(myTree.getTreeRoot())
