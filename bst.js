@@ -55,11 +55,25 @@ const Tree = (array) => {
         }
       }
 
+    const find = (value) => {
+        let currentNode = root  //start at root node
+
+        while(currentNode != null){
+            if (currentNode.data === value){
+                return currentNode
+            } else if(value < currentNode.data){       //if value is less than rootNode,
+                currentNode = currentNode.left         //then check left subtree.
+            } else {currentNode = currentNode.right}   //Otherwise check right subtree
+        }
+        return currentNode
+    }
+
     root = buildTree(array);
 
     return {
         getTreeRoot,
-        prettyPrint
+        prettyPrint,
+        find
     }
 
 }
@@ -68,5 +82,6 @@ const Tree = (array) => {
 let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
-console.log(myTree.getTreeRoot())
-myTree.prettyPrint(myTree.getTreeRoot())
+//console.log(myTree.getTreeRoot())
+//myTree.prettyPrint(myTree.getTreeRoot())
+console.log(myTree.find(2))
