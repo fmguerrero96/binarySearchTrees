@@ -55,7 +55,7 @@ const Tree = (array) => {
         }
       }
 
-    if(array) {root = buildTree(array)};
+    root = buildTree(array);
 
     return {
         getTreeRoot,
