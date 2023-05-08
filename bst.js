@@ -16,8 +16,7 @@ const Tree = (array) => {
     }
 
     const buildTree = (array) => {
-        const preparedArray = sortArrayRemoveDuplicates(array);
-        return buildTreeRec(preparedArray);
+        return buildTreeRec(sortArrayRemoveDuplicates(array))
     }
 
     const buildTreeRec = (arr) => {
@@ -83,5 +82,5 @@ let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
 //console.log(myTree.getTreeRoot())
-//myTree.prettyPrint(myTree.getTreeRoot())
-console.log(myTree.find(2))
+myTree.prettyPrint(myTree.getTreeRoot())
+//console.log(myTree.find(2))
