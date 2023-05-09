@@ -67,15 +67,33 @@ const Tree = (array) => {
         return currentNode
     }
 
+    const insert = (value) => {
+        let currentNode = root 
+
+        while(currentNode.left !== null || currentNode.right !== null){
+            if (value > currentNode.data){
+                currentNode = currentNode.right
+            } else if (value < currentNode.data){
+                currentNode = currentNode.left
+            } else {return null}
+        }
+        if (value > currentNode.data){
+            currentNode.right = Node(value)
+        } else {currentNode.left = Node(value)}
+        return currentNode
+    }
+
     root = buildTree(array);
 
     return {
         getTreeRoot,
         prettyPrint,
-        find
+        find,
+        insert
     }
 
 }
+
 
 
 let a = [9,8,7,6,5,4,3,2,1]
@@ -84,3 +102,5 @@ let myTree = Tree(a)
 //console.log(myTree.getTreeRoot())
 myTree.prettyPrint(myTree.getTreeRoot())
 //console.log(myTree.find(2))
+console.log(myTree.insert(-1))
+myTree.prettyPrint(myTree.getTreeRoot())
