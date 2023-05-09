@@ -68,18 +68,18 @@ const Tree = (array) => {
     }
 
     const insert = (value) => {
-        let currentNode = root 
+        let currentNode = root   //start at root node 
 
-        while(currentNode.left !== null || currentNode.right !== null){
-            if (value > currentNode.data){
-                currentNode = currentNode.right
+        while(currentNode.left !== null || currentNode.right !== null){  //while left and right are occupied 
+            if (value > currentNode.data){                               
+                currentNode = currentNode.right                          //check right subtree
             } else if (value < currentNode.data){
-                currentNode = currentNode.left
-            } else {return null}
+                currentNode = currentNode.left                           //check left subtree
+            } else {return null}                                         //return null if it's a duplicate
         }
         if (value > currentNode.data){
-            currentNode.right = Node(value)
-        } else {currentNode.left = Node(value)}
+            currentNode.right = Node(value)                              //set value as right child
+        } else {currentNode.left = Node(value)}                          //set value as left child
         return currentNode
     }
 
@@ -102,5 +102,5 @@ let myTree = Tree(a)
 //console.log(myTree.getTreeRoot())
 myTree.prettyPrint(myTree.getTreeRoot())
 //console.log(myTree.find(2))
-console.log(myTree.insert(-1))
+console.log(myTree.insert(7))
 myTree.prettyPrint(myTree.getTreeRoot())
