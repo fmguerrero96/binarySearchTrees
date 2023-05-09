@@ -96,6 +96,21 @@ const Tree = (array) => {
         return null
     }
 
+    const remove = (value) => {
+        let nodeToRemove = find(value)
+        let parent
+        //check to see if node has no children
+        if (nodeToRemove.right === null && nodeToRemove.left === null){
+            parent = findParent(value)
+            if(parent.left.data === value){
+                parent.left = null
+            }else if (parent.right.data === value){
+                parent.right = null
+            }
+        }
+         
+    }
+
     root = buildTree(array);
 
     return {
@@ -103,7 +118,7 @@ const Tree = (array) => {
         prettyPrint,
         find,
         insert,
-        findParent
+        remove
     }
 
 }
@@ -114,4 +129,8 @@ let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
 myTree.prettyPrint(myTree.getTreeRoot())
-console.log(myTree.findParent(1))
+myTree.remove(9)
+myTree.prettyPrint(myTree.getTreeRoot())
+myTree.remove(1)
+myTree.prettyPrint(myTree.getTreeRoot())
+
