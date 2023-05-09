@@ -83,13 +83,27 @@ const Tree = (array) => {
         return currentNode
     }
 
+    const findParent = (value) => {
+        let parent = root
+
+        while(parent !== null){
+            if (parent.left.data === value || parent.right.data === value){
+                return parent
+            } else if (value < parent.data){
+                parent = parent.left
+            } else {parent = parent.right}
+        }
+        return null
+    }
+
     root = buildTree(array);
 
     return {
         getTreeRoot,
         prettyPrint,
         find,
-        insert
+        insert,
+        findParent
     }
 
 }
@@ -99,8 +113,5 @@ const Tree = (array) => {
 let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
-//console.log(myTree.getTreeRoot())
 myTree.prettyPrint(myTree.getTreeRoot())
-//console.log(myTree.find(2))
-console.log(myTree.insert(7))
-myTree.prettyPrint(myTree.getTreeRoot())
+console.log(myTree.findParent(1))
