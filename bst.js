@@ -96,6 +96,17 @@ const Tree = (array) => {
         return null
     }
 
+
+    const nextSmallest = (node) => {
+        let minv = node.data;
+            while (node.left != null)
+            {
+                minv = node.left.data;
+                node = node.left;
+            }
+            return minv;
+    }
+
     const remove = (value) => {
         let nodeToRemove = find(value)
         let parent
@@ -137,11 +148,3 @@ let a = [9,8,7,6,5,4,3,2,1]
 let myTree = Tree(a)
 
 myTree.prettyPrint(myTree.getTreeRoot())
-myTree.remove(7)
-myTree.insert(15)
-myTree.prettyPrint(myTree.getTreeRoot())
-myTree.remove(9)
-myTree.prettyPrint(myTree.getTreeRoot())
-
-
-
