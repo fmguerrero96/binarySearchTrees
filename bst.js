@@ -70,16 +70,16 @@ const Tree = (array) => {
     const insert = (value) => {
         let currentNode = root   //start at root node 
 
-        while(currentNode.left !== null || currentNode.right !== null){  //while left and right are occupied 
+        while(currentNode.left !== null || currentNode.right !== null){   
             if (value > currentNode.data){                               
-                currentNode = currentNode.right                          //check right subtree
+                currentNode = currentNode.right                          
             } else if (value < currentNode.data){
-                currentNode = currentNode.left                           //check left subtree
-            } else {return null}                                         //return null if it's a duplicate
+                currentNode = currentNode.left                           
+            } else {return null}                                        
         }
         if (value > currentNode.data){
-            currentNode.right = Node(value)                              //set value as right child
-        } else {currentNode.left = Node(value)}                          //set value as left child
+            currentNode.right = Node(value)                              
+        } else {currentNode.left = Node(value)}                         
         return currentNode
     }
 
@@ -98,13 +98,12 @@ const Tree = (array) => {
 
 
     const nextSmallest = (node) => {
-        let minv = node.data;
-            while (node.left != null)
+        let min = node;
+            while (min.left != null)
             {
-                minv = node.left.data;
-                node = node.left;
+                min = min.left;
             }
-            return minv;
+            return min;
     }
 
     const remove = (value) => {
@@ -119,16 +118,25 @@ const Tree = (array) => {
                 parent.right = null
             }
         }
-        //check if node has only one child
-        if(nodeToRemove.right != null){
-           nodeToRemove.data = nodeToRemove.right.data
-           nodeToRemove.right = null
-        } else if (nodeToRemove.left != null){
-            nodeToRemove.data = nodeToRemove.left.data
-            nodeToRemove.left = null
-          }
-        }
-         
+
+        //check if node has two children
+        if (nodeToRemove.left !== null && nodeToRemove.right !== null) {
+            let rightChild = nodeToRemove.right
+            let smallestInSubtree = nextSmallest(rightChild)
+            let parentofSmallest = findParent(smallestInSubtree.data)
+            nodeToRemove.data = smallestInSubtree.data
+            parentofSmallest.left = null
+            
+            //check if node has only one child
+                }else if (nodeToRemove.right != null){
+                    nodeToRemove.data = nodeToRemove.right.data
+                    nodeToRemove.right = null
+                } else if (nodeToRemove.left != null){
+                    nodeToRemove.data = nodeToRemove.left.data
+                    nodeToRemove.left = null
+                }
+    }
+        
 
     root = buildTree(array);
 
@@ -137,14 +145,17 @@ const Tree = (array) => {
         prettyPrint,
         find,
         insert,
-        remove
+        remove,
+        nextSmallest
     }
 
 }
 
 
 
-let a = [9,8,7,6,5,4,3,2,1]
+let a = [12,4,77,8,26,18,2,98,76,45,33,123,35,66,76,124,321,326,339,150,]
 let myTree = Tree(a)
 
+myTree.prettyPrint(myTree.getTreeRoot())
+myTree.remove(124)
 myTree.prettyPrint(myTree.getTreeRoot())
