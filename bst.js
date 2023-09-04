@@ -126,7 +126,7 @@ const Tree = (array) => {
             let parentofSmallest = findParent(smallestInSubtree.data)
             nodeToRemove.data = smallestInSubtree.data
             parentofSmallest.left = null
-            
+
             //check if node has only one child
                 }else if (nodeToRemove.right != null){
                     nodeToRemove.data = nodeToRemove.right.data
@@ -136,8 +136,8 @@ const Tree = (array) => {
                     nodeToRemove.left = null
                 }
     }
-        
 
+    
     root = buildTree(array);
 
     return {
@@ -146,7 +146,7 @@ const Tree = (array) => {
         find,
         insert,
         remove,
-        nextSmallest
+        levelOrder
     }
 
 }
@@ -157,5 +157,7 @@ let a = [12,4,77,8,26,18,2,98,76,45,33,123,35,66,76,124,321,326,339,150,]
 let myTree = Tree(a)
 
 myTree.prettyPrint(myTree.getTreeRoot())
-myTree.remove(124)
-myTree.prettyPrint(myTree.getTreeRoot())
+myTree.levelOrder(myTree.getTreeRoot())
+
+//https://www.theodinproject.com/lessons/javascript-binary-search-trees
+//step 6 - levelOrder
